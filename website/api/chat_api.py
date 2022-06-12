@@ -42,14 +42,14 @@ def joinroom():
     cursor = group.query.filter(and_(group.groupid == form.Room_Id.data, group.password == form.Room_Code.data)).first()
     if cursor:
       if current_user in cursor.participants:
-        return redirect(url_for('chat', roomid = form.Room_Id.data))
+        return redirect(url_for('chat.chat_room', roomid = form.Room_Id.data))
       else:
         cursor.participants.append(current_user)
         db.session.commit()
         return redirect(url_for('chat', roomid = form.Room_Id.data))
     else:
       flash("Room doesn't exists")
-      return redirect(url_for('index'))
+      return redirect(url_for('chat.createjoinroom'))
   else:
     print(form.errors)
     flash('Invalid Form')
