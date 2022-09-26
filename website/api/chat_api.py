@@ -46,7 +46,7 @@ def joinroom():
       else:
         cursor.participants.append(current_user)
         db.session.commit()
-        return redirect(url_for('chat', roomid = form.Room_Id.data))
+        return redirect(url_for('chat.chat_room', roomid = form.Room_Id.data))
     else:
       flash("Room doesn't exists")
       return redirect(url_for('chat.createjoinroom'))
